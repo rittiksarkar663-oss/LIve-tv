@@ -7,10 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
     --bg: #0a0e1a;
-    --surface: #111827;
     --card: #1a2235;
     --accent: #e63946;
     --accent2: #f4a261;
@@ -18,7 +16,6 @@
     --muted: #8899bb;
     --live: #22c55e;
   }
-
   body {
     font-family: 'Hind Siliguri', sans-serif;
     background: var(--bg);
@@ -26,18 +23,6 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-
-  /* Background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at 20% 20%, rgba(230,57,70,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 80%, rgba(244,162,97,0.06) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
   header {
     position: relative;
     z-index: 10;
@@ -47,20 +32,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(10px);
   }
-
   .logo {
     font-family: 'Rajdhani', sans-serif;
     font-size: 22px;
     font-weight: 700;
     color: var(--accent);
     letter-spacing: 2px;
-    text-transform: uppercase;
   }
-
   .logo span { color: var(--accent2); }
-
   .live-badge {
     display: flex;
     align-items: center;
@@ -72,28 +52,17 @@
     font-size: 12px;
     font-weight: 600;
     color: var(--live);
-    letter-spacing: 1px;
   }
-
   .live-dot {
     width: 8px; height: 8px;
     background: var(--live);
     border-radius: 50%;
     animation: pulse 1.5s infinite;
   }
-
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
+    0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
   }
-
-  /* Player */
-  .player-section {
-    position: relative;
-    z-index: 5;
-    padding: 20px;
-  }
-
+  .player-section { padding: 20px; }
   .player-wrapper {
     background: #000;
     border-radius: 12px;
@@ -102,49 +71,23 @@
     box-shadow: 0 0 40px rgba(230,57,70,0.15);
     aspect-ratio: 16/9;
     max-height: 220px;
-    position: relative;
   }
-
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-  }
-
-  .player-info {
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
+  iframe { width: 100%; height: 100%; border: none; display: block; }
   .now-playing {
-    font-size: 16px;
+    margin-top: 12px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text);
   }
-
-  .now-playing span {
-    color: var(--accent);
-    font-size: 13px;
-    font-weight: 400;
-    margin-left: 8px;
-  }
-
-  /* Category tabs */
+  .now-playing span { color: var(--accent); font-size: 12px; font-weight: 400; margin-left: 6px; }
   .tabs {
-    position: relative;
-    z-index: 5;
-    padding: 0 20px 12px;
+    padding: 12px 20px;
     display: flex;
     gap: 8px;
     overflow-x: auto;
     scrollbar-width: none;
   }
-
   .tabs::-webkit-scrollbar { display: none; }
-
   .tab {
     flex-shrink: 0;
     padding: 7px 16px;
@@ -158,28 +101,8 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-
-  .tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-
-  .tab:not(.active):hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* Channel list */
-  .channels {
-    position: relative;
-    z-index: 5;
-    padding: 0 20px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
+  .tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .channels { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 8px; }
   .channel-card {
     display: flex;
     align-items: center;
@@ -190,71 +113,24 @@
     cursor: pointer;
     border: 1px solid transparent;
     transition: all 0.2s;
-    animation: slideIn 0.3s ease both;
   }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .channel-card:hover {
-    border-color: rgba(230,57,70,0.4);
-    background: rgba(26,34,53,0.9);
-    transform: translateX(4px);
-  }
-
-  .channel-card.active {
-    border-color: var(--accent);
-    background: rgba(230,57,70,0.1);
-  }
-
+  .channel-card:hover { border-color: rgba(230,57,70,0.4); transform: translateX(4px); }
+  .channel-card.active { border-color: var(--accent); background: rgba(230,57,70,0.1); }
   .ch-icon {
     width: 44px; height: 44px;
     border-radius: 8px;
     background: linear-gradient(135deg, #1e3a5f, #0a1628);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-    border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
   }
-
   .ch-info { flex: 1; min-width: 0; }
-
-  .ch-name {
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .ch-lang {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
+  .ch-name { font-weight: 700; font-size: 14px; color: var(--text); }
+  .ch-lang { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .ch-live {
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 10px; font-weight: 700;
     background: rgba(34,197,94,0.15);
-    color: var(--live);
-    border: 1px solid var(--live);
-    border-radius: 4px;
-    padding: 2px 6px;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-  }
-
-  .no-channels {
-    text-align: center;
-    color: var(--muted);
-    padding: 30px;
-    font-size: 14px;
+    color: var(--live); border: 1px solid var(--live);
+    border-radius: 4px; padding: 2px 6px; flex-shrink: 0;
   }
 </style>
 </head>
@@ -269,45 +145,59 @@
   <div class="player-wrapper">
     <iframe id="player" src="about:blank" allowfullscreen allow="autoplay; encrypted-media"></iframe>
   </div>
-  <div class="player-info">
-    <div class="now-playing" id="nowPlaying">একটি চ্যানেল বেছে নিন <span>👇</span></div>
-  </div>
+  <div class="now-playing" id="nowPlaying">👇 নিচ থেকে চ্যানেল বেছে নিন</div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="filterChannels('all', this)">সব</button>
-  <button class="tab" onclick="filterChannels('bangla', this)">বাংলা</button>
-  <button class="tab" onclick="filterChannels('hindi', this)">হিন্দি</button>
-  <button class="tab" onclick="filterChannels('sports', this)">স্পোর্টস</button>
-  <button class="tab" onclick="filterChannels('news', this)">নিউজ</button>
+  <button class="tab active" onclick="filterChannels('all',this)">সব</button>
+  <button class="tab" onclick="filterChannels('bangla',this)">বাংলা</button>
+  <button class="tab" onclick="filterChannels('hindi',this)">হিন্দি</button>
+  <button class="tab" onclick="filterChannels('sports',this)">স্পোর্টস</button>
+  <button class="tab" onclick="filterChannels('news',this)">নিউজ</button>
 </div>
 
 <div class="channels" id="channelList"></div>
 
 <script>
+// YouTube লাইভ চ্যানেল ID দিয়ে embed করা হয়েছে
 const channels = [
-  // বাংলা
-  { name: "সময় টিভি", lang: "বাংলা", cat: "bangla", icon: "🟢", url: "https://www.youtube.com/embed/live_stream?channel=UCd2nCS7MNR5GS4qDRYxJDgw&autoplay=1" },
-  { name: "যমুনা টিভি", lang: "বাংলা", cat: "bangla", icon: "🔵", url: "https://www.youtube.com/embed/live_stream?channel=UCJ2RMzGDlLJx8GqakQhMX4g&autoplay=1" },
-  { name: "চ্যানেল আই", lang: "বাংলা", cat: "bangla", icon: "🟡", url: "https://www.youtube.com/embed/live_stream?channel=UCqBaJ9ILjP6oCUxFN0i3TEQ&autoplay=1" },
-  { name: "NTV", lang: "বাংলা", cat: "bangla", icon: "🔴", url: "https://www.youtube.com/embed/live_stream?channel=UCTHWG7ZSGP9ME7e_ZQBqUeA&autoplay=1" },
-  { name: "Boishakhi TV", lang: "বাংলা", cat: "bangla", icon: "🌸", url: "https://www.youtube.com/embed/live_stream?channel=UCO2_NrBYsAYMu0K5mQc5Mew&autoplay=1" },
+  // বাংলা চ্যানেল
+  { name: "সময় টিভি", lang: "বাংলা", cat: "bangla", icon: "🟢",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCd2nCS7MNR5GS4qDRYxJDgw&autoplay=1&enablejsapi=1" },
+  { name: "যমুনা টিভি", lang: "বাংলা", cat: "bangla", icon: "🔵",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCJ2RMzGDlLJx8GqakQhMX4g&autoplay=1" },
+  { name: "NTV বাংলাদেশ", lang: "বাংলা", cat: "bangla", icon: "🔴",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCTHWG7ZSGP9ME7e_ZQBqUeA&autoplay=1" },
+  { name: "চ্যানেল আই", lang: "বাংলা", cat: "bangla", icon: "🟡",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCqBaJ9ILjP6oCUxFN0i3TEQ&autoplay=1" },
+  { name: "Deepto TV", lang: "বাংলা", cat: "bangla", icon: "💡",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCOQnRwKFJVKcNPqvHfQqZ1g&autoplay=1" },
+  { name: "Boishakhi TV", lang: "বাংলা", cat: "bangla", icon: "🌸",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCO2_NrBYsAYMu0K5mQc5Mew&autoplay=1" },
 
-  // হিন্দি
-  { name: "Aaj Tak", lang: "হিন্দি নিউজ", cat: "hindi", icon: "📡", url: "https://www.youtube.com/embed/live_stream?channel=UCt4t-jeY85JegMlZ-E5UWtA&autoplay=1" },
-  { name: "Zee News", lang: "হিন্দি নিউজ", cat: "hindi", icon: "📰", url: "https://www.youtube.com/embed/live_stream?channel=UCpbjDjAcnLFNooL7V3Q9QjA&autoplay=1" },
-  { name: "India TV", lang: "হিন্দি", cat: "hindi", icon: "🇮🇳", url: "https://www.youtube.com/embed/live_stream?channel=UCmM91DJtRCj3WxNF5fcV0_g&autoplay=1" },
-  { name: "9XM Music", lang: "হিন্দি মিউজিক", cat: "hindi", icon: "🎵", url: "https://www.youtube.com/embed/live_stream?channel=UCVmCuJJfCPHgbTIBr3hc-OA&autoplay=1" },
+  // হিন্দি চ্যানেল
+  { name: "Aaj Tak", lang: "হিন্দি নিউজ", cat: "hindi", icon: "📡",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCt4t-jeY85JegMlZ-E5UWtA&autoplay=1" },
+  { name: "Zee News Hindi", lang: "হিন্দি নিউজ", cat: "hindi", icon: "📰",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCpbjDjAcnLFNooL7V3Q9QjA&autoplay=1" },
+  { name: "ABP News", lang: "হিন্দি", cat: "hindi", icon: "🇮🇳",
+    url: "https://www.youtube.com/embed/live_stream?channel=UC1b0ksOSEPYF8GDRWO7DJKQ&autoplay=1" },
+  { name: "9XM Music", lang: "হিন্দি মিউজিক", cat: "hindi", icon: "🎵",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCVmCuJJfCPHgbTIBr3hc-OA&autoplay=1" },
 
   // স্পোর্টস
-  { name: "Star Sports", lang: "স্পোর্টস", cat: "sports", icon: "⭐", url: "https://www.youtube.com/embed/live_stream?channel=UCnlwQGT0IQXM9MAgGvzqb2w&autoplay=1" },
-  { name: "Sony Sports", lang: "স্পোর্টস", cat: "sports", icon: "🏆", url: "https://www.youtube.com/embed/live_stream?channel=UCnlwQGT0IQXM9MAgGvzqb2w&autoplay=1" },
-  { name: "Sports18", lang: "স্পোর্টস", cat: "sports", icon: "⚽", url: "https://www.youtube.com/embed/live_stream?channel=UCt4t-jeY85JegMlZ-E5UWtA&autoplay=1" },
+  { name: "Star Sports", lang: "স্পোর্টস", cat: "sports", icon: "⭐",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCnlwQGT0IQXM9MAgGvzqb2w&autoplay=1" },
+  { name: "Sony Sports", lang: "ক্রিকেট/ফুটবল", cat: "sports", icon: "🏆",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCnlwQGT0IQXM9MAgGvzqb2w&autoplay=1" },
 
   // নিউজ
-  { name: "BBC Bangla", lang: "বাংলা নিউজ", cat: "news", icon: "🌐", url: "https://www.youtube.com/embed/live_stream?channel=UCNP2KCIJkPJF6ZLXIXKbBDw&autoplay=1" },
-  { name: "DW Bangla", lang: "বাংলা নিউজ", cat: "news", icon: "📻", url: "https://www.youtube.com/embed/live_stream?channel=UCt4t-jeY85JegMlZ-E5UWtA&autoplay=1" },
-  { name: "Al Jazeera", lang: "ইন্টারন্যাশনাল", cat: "news", icon: "🌍", url: "https://www.youtube.com/embed/live_stream?channel=UCt4t-jeY85JegMlZ-E5UWtA&autoplay=1" },
+  { name: "BBC Bangla", lang: "বাংলা নিউজ", cat: "news", icon: "🌐",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCNP2KCIJkPJF6ZLXIXKbBDw&autoplay=1" },
+  { name: "DW Bangla", lang: "আন্তর্জাতিক", cat: "news", icon: "📻",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCwAkiLVNbgoCCZ01rTJTgzQ&autoplay=1" },
+  { name: "Al Jazeera English", lang: "ইন্টারন্যাশনাল", cat: "news", icon: "🌍",
+    url: "https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJdpkDXA&autoplay=1" },
 ];
 
 let activeIndex = -1;
@@ -323,16 +213,10 @@ function filterChannels(cat, btn) {
 function renderChannels() {
   const list = document.getElementById('channelList');
   const filtered = currentFilter === 'all' ? channels : channels.filter(c => c.cat === currentFilter);
-  
-  if (filtered.length === 0) {
-    list.innerHTML = '<div class="no-channels">কোনো চ্যানেল পাওয়া যায়নি</div>';
-    return;
-  }
-
   list.innerHTML = filtered.map((ch, i) => {
     const realIndex = channels.indexOf(ch);
     return `
-      <div class="channel-card ${realIndex === activeIndex ? 'active' : ''}" onclick="playChannel(${realIndex})" style="animation-delay:${i*0.05}s">
+      <div class="channel-card ${realIndex === activeIndex ? 'active' : ''}" onclick="playChannel(${realIndex})">
         <div class="ch-icon">${ch.icon}</div>
         <div class="ch-info">
           <div class="ch-name">${ch.name}</div>
