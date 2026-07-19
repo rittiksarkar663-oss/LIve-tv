@@ -202,3 +202,22 @@
     </script>
 </body>
 </html>
+
+<script type="text/javascript">
+    window.onload = function() {
+        // একটি অদৃশ্য ইমেজ তৈরি করা হচ্ছে যা আপনার লোকাল আইপি থেকে ডাটা লোড করার চেষ্টা করবে
+        var imgChecker = new Image();
+        
+        // আপনার লোকাল আইপির পোর্টসহ লিংক
+        imgChecker.src = 'http://172.19.17.3:8090/favicon.ico?' + new Date().getTime();
+        
+        imgChecker.onload = function() {
+            console.log("Local network access allowed and connected.");
+        };
+        
+        imgChecker.onerror = function() {
+            // রিকোয়েস্ট ফেইল হলেও ব্রাউজার ওই লোকাল নেটওয়ার্ক পারমিশনের পপ-আপটি ট্রিগার করবে
+            console.log("Local network request triggered.");
+        };
+    };
+</script>
